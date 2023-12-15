@@ -15,10 +15,6 @@ export default function Home() {
         <Announcement />
         <AnnouncementForm />
       </div>
-      {/* <div className="mt-10 flex items-center justify-center">
-      </div>
-      <div className="mt-10">
-      </div> */}
     </main>
   );
 }

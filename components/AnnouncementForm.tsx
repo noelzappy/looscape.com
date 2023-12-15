@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import axios from "axios";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -39,19 +40,11 @@ export function AnnouncementForm() {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
-      const response = await client.lists.addListMember("e9f3695e07", {
-        email_address: data.email,
-        status: "pending",
-      });
-      console.log(response);
+      await axios.post("/api/addMemebers", data);
       toast({
-        title: "You submitted the following values:",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-          </pre>
-        ),
+        description: "Thank you for joining our waitlist,",
       });
+      form.reset();
     } catch (error) {
       console.log(error);
     }
