@@ -10,7 +10,11 @@ const Announcement = () => {
         location and duration. Elevate your brand visibility effortlessly.
       </div>
       <div className="text-lg text-muted-foreground text-center mt-5">
-        Provide your email below to get notified when we launch
+        Provide your email below to get notified when we launch or reach out to{" "}
+        <a href="mailto:hello@looscape.com" className="text-[#212144]">
+          hello@looscape.com
+        </a>{" "}
+        for more information
       </div>
     </div>
   );

@@ -60,7 +60,7 @@ export function AnnouncementForm() {
                   <Input
                     placeholder="example@email.com"
                     {...field}
-                    className="w-[500px]"
+                    className="md:w-[500px] w-[300px]"
                   />
                 </FormControl>
                 <FormMessage />
