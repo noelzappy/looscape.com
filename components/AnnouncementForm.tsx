@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -12,7 +11,6 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import client from "@/lib/mail";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 
@@ -39,18 +37,19 @@ export function AnnouncementForm() {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
-      const response = await client.lists.addListMember("e9f3695e07", {
-        email_address: data.email,
-        status: "pending",
+      const _response = await fetch("/api/subscribe", {
+        method: "POST",
+        body: JSON.stringify({
+          email: data.email,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
-      console.log(response);
+
       toast({
-        title: "You submitted the following values:",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-          </pre>
-        ),
+        title: "Success",
+        description: "You have been subscribed to our newsletter",
       });
     } catch (error) {
       console.log(error);
