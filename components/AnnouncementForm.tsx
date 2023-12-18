@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -13,7 +12,6 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import client from "@/lib/mail";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 
@@ -40,9 +38,19 @@ export function AnnouncementForm() {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
-      await axios.post("/api/addMemebers", data);
+      const _response = await fetch("/api/subscribe", {
+        method: "POST",
+        body: JSON.stringify({
+          email: data.email,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
       toast({
-        description: "Thank you for joining our waitlist,",
+        title: "Success",
+        description: "You have been subscribed to our newsletter",
       });
       form.reset();
     } catch (error) {
